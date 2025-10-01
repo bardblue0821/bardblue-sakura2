@@ -26,10 +26,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  overflow: hidden;  /* no scroll bar */
 }
 
 h1 {
@@ -68,3 +65,54 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/*
+.jp-regular {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jp-medium {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.jp-bold {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.jp-black {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+*/
+
+.en-regular {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.en-bold {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.en-regular-italic {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.jp-regular {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+

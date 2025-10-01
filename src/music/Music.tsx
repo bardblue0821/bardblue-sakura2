@@ -1,7 +1,11 @@
 import React from 'react';
+import Background from './background.jpg';
+import BackgroundImage from '../common/BackgroundImage';
 
 const Music: React.FC = () => {
-    return <div>Music Component</div>;
+    return (
+        <BackgroundImage background={Background} /> 
+    );
 };
 
 export default Music;
