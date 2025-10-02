@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 src/vrchat/photo/*
+src/illust/photo/*
