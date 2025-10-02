@@ -21,8 +21,8 @@ const Header: React.FC = () => {
             <div className="flex justify-between items-center w-full px-8">
                 <span className="justify-center relative flex gap-8" style={{height: itemHeight}}>
                     <span
-                        className="absolute left-0 top-8 -translate-y-1/2 rounded-md bg-yellow-800 
-                        opacity-70 -z-10 transition-all duration-500"
+                        className="absolute left-0 top-8 -translate-y-1/2 rounded-md bg-yellow-800/50 
+                        -z-10 transition-all duration-500"
                         style={{
                             width: itemWidth,
                             height: itemHeight,

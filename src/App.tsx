@@ -23,16 +23,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen min-w-full">
+      <div className="flex-col">
         {show && (
           <Welcome fadeOut={fadeOut} handleTransitionEnd={handleTransitionEnd} />
         )}
 
-        <header className="absolute top-0 left-0 w-full h-[70px] flex items-center justify-center">
+        <header className="w-full h-[70px] flex items-center justify-center">
           <Header />
         </header>
 
-        <main className="w-full h-full flex-1 flex items-center">
+        <main className="flex-1 h-[calc(100vh-140px)]">
           <Routes>
             <Route path="/" element={<Navigate to="/illust" replace />} />
             <Route path="/illust" element={<Illust />} />
@@ -42,7 +42,7 @@ function App() {
           </Routes>
         </main>
         
-        <footer className="absolute bottom-0 left-0 w-full h-[70px] flex items-center justify-center">
+        <footer className="w-full h-[70px] flex items-center justify-center">
           <Footer />
         </footer>
       </div>

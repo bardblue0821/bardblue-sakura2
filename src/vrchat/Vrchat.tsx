@@ -1,16 +1,22 @@
-import React from 'react';
+/// <reference types="vite/client" />
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Background from './background.png';
 import BackgroundImage from '../common/BackgroundImage';
+import Gallery from '../common/Gallery';
+import { ImageItem } from '../common/types';
+import { getGalleryItems } from '../common/getGalleryItems';
+
+// 画像リスト取得
+const items: ImageItem[] = getGalleryItems();
 
 const Vrchat: React.FC = () => {
-    return (
-        <>
-            <BackgroundImage background={Background} />
-            <div className="h-full w-full p-8">
-              <h1 className="text-yellow-100 en-bold">VRChat</h1>
-            </div>
-        </>
-    );
+
+  return (
+    <>
+      <BackgroundImage background={Background} />
+      <Gallery items={items} />
+    </>
+  );
 };
 
 export default Vrchat;
