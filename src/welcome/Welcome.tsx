@@ -12,8 +12,9 @@ const Welcome: React.FC<WelcomeProps> = ({fadeOut, handleTransitionEnd}) => {
         <div className={`fixed inset-0 z-50 flex items-center justify-center 
             transition-opacity duration-700 ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
             onTransitionEnd={handleTransitionEnd}>
-            <div className="flex flex-col justify-center items-center w-full h-full bg-yellow-800 p-12 ">
-                <div className="flex flex-col justify-center items-center h-full w-full border-yellow-100 border-4 bg-transparent p-12">
+            <div className="flex flex-col justify-center items-center w-full h-full bg-yellow-950 p-12 ">
+                <div className="flex flex-col justify-center items-center h-full w-full border-yellow-100 border-t-2
+                  border-b-2 bg-transparent p-12">
                     <h1 className="text-4xl text-yellow-100 font-bold en-bold">Welcome</h1>
                 </div>
             </div>
