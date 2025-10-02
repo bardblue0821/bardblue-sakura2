@@ -19,7 +19,7 @@ const Bio: React.FC = () => {
         <div className="flex w-full justify-center">
           <img src={Icon} alt="Profile Icon" className="rounded-full w-36 h-36" />
         </div>
-        <h1 className="text-yellow-100 en-bold mt-4">MonKupo</h1>
+        <h1 className="text-yellow-100 text-3xl en-bold mt-4">MonKupo</h1>
         <div className="mt-4 text-yellow-100 en-regular max-w-3xl">
           <p className="jp-regular text-center text-xl">作曲 / イラスト / Web サイト制作</p>
           <p className="mt-2 jp-regular text-center text-xl">レコードとモーグリが好き</p>
