@@ -15,6 +15,7 @@ const Music: React.FC = () => {
 
   const [currentTrack, setCurrentTrack] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
 
   // 曲が変わったらロードし直す
   useEffect(() => {
@@ -23,19 +24,45 @@ const Music: React.FC = () => {
     setIsPlaying(false);
   }, [currentTrack]);
 
-  // 再生終了時に次の曲へ
+  // 再生終了時に次の曲またはリピート
   useEffect(() => {
     if (!wavesurferRef.current) return;
     const ws = wavesurferRef.current;
     const onFinish = () => {
-      handleNext();
+      if (isRepeat) {
+        ws.play(0);
+      } else {
+        handleNext();
+      }
     };
     ws.on('finish', onFinish);
     return () => {
       ws.un('finish', onFinish);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTrack]);
+  }, [currentTrack, isRepeat]);
+  // 1曲リピートボタン
+  const RepeatButton = ({
+    isRepeat,
+    onToggle,
+  }: {
+    isRepeat: boolean;
+    onToggle: () => void;
+  }) => (
+    <button
+      className={`w-24 cursor-pointer duration-300 ${isRepeat ? 'bg-yellow-600' : 'bg-yellow-800/80'} hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl`}
+      onClick={onToggle}
+      aria-label="Repeat One"
+      title="1曲リピート"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="inline-block w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17 17H7a5 5 0 0 1 0-10h1V5l3 3-3 3V8H7a3 3 0 0 0 0 6h10v-2l3 3-3 3v-2z" />
+        {isRepeat && (
+          <text x="12" y="16" textAnchor="middle" fontSize="10" fill="#fff">1</text>
+        )}
+      </svg>
+    </button>
+  );
 
   useEffect(() => {
     if (!waveformRef.current) return;
@@ -202,6 +229,7 @@ const Music: React.FC = () => {
                 }}
               />
               <NextButton onNext={handleNext} />
+              <RepeatButton isRepeat={isRepeat} onToggle={() => setIsRepeat(r => !r)} />
               <VolumeControl />
             </div>
             <div className="mt-2 text-lg text-yellow-200">
