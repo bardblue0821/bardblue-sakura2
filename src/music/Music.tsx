@@ -120,7 +120,9 @@ const Music: React.FC = () => {
             </div>
           </div>
           <div className="text-yellow-100 min-h-[40%] justify-center w-full mb-8 px-4 flex">
-            <div className="mr-4 flex flex-col">
+            <div className="mr-4 flex flex-col relative items-center">
+                <div className="bg-yellow-900 h-[16rem] w-[16rem] z-100 absolute top-30 pointer-none"></div>
+                <div className="bg-yellow-900 h-[16rem] w-[16rem] -z-10 absolute top-0 pointer-none"></div>
               {Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
