@@ -7,7 +7,7 @@ import { IoMail } from "react-icons/io5";
 
 const Footer: React.FC = () => {
     return (
-        <footer className="w-full flex justify-center items-center">
+        <footer className="w-full flex justify-center items-center z-20">
             <div className="flex justify-between items-center w-full px-8">
                 <span className="text-yellow-100 flex items-center gap-4">
                     <a href="https://twitter.com/MonKupo" target="_blank" rel="noopener noreferrer" className="text-white hover:text-yellow-800">

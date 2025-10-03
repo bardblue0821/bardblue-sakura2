@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Background from './background.jpg';
 import BackgroundImage from '../common/BackgroundImage';
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
 import WaveSurfer from 'wavesurfer.js';
 
 const Music: React.FC = () => {
@@ -89,6 +87,19 @@ const Music: React.FC = () => {
     </button>
   );
 
+  const Box = ({ label }: { label: string }) => {
+    return (
+      <>
+        <div className="bg-yellow-900 h-[16rem] w-[16rem] z-10 absolute top-30 pointer-none"></div>
+        <div className="bg-yellow-900 h-[16rem] w-[16rem] z-11 absolute top-30 pointer-none">
+          <h1 className="text-center mt-4 mx-4 text-2xl text-yellow-900 
+            border-2 rounded-lg p-2 en-regular bg-yellow-200">{label}</h1>
+        </div>
+        <div className="bg-yellow-900 h-[16rem] w-[16rem] -z-10 absolute top-0 pointer-none"></div>
+      </>
+    )
+  }
+
   return (
     <>
       <BackgroundImage background={Background} />
@@ -119,10 +130,9 @@ const Music: React.FC = () => {
               <VolumeControl />
             </div>
           </div>
-          <div className="text-yellow-100 min-h-[40%] justify-center w-full mb-8 px-4 flex">
-            <div className="mr-4 flex flex-col relative items-center">
-                <div className="bg-yellow-900 h-[16rem] w-[16rem] z-100 absolute top-30 pointer-none"></div>
-                <div className="bg-yellow-900 h-[16rem] w-[16rem] -z-10 absolute top-0 pointer-none"></div>
+          <div className="text-yellow-100 min-h-[40%] justify-center w-full gap-x-8 px-4 flex">
+            <div className="flex flex-col relative items-center">
+              <Box label="Digital Signage" />
               {Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
@@ -134,27 +144,42 @@ const Music: React.FC = () => {
                 />
               ))}
             </div>
-            <div className="mr-4">
+            <div className="flex flex-col relative items-center">
+              <Box label="Digital Signage" />
               {Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
-                  className="-mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 border-4 border-yellow-100 rounded-lg flex items-center justify-center text-white text-2xl font-bold"
+                  className={`relative -mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 
+                  border-4 border-yellow-100 rounded-lg flex items-center justify-center
+                  text-white text-2xl font-bold transition-transform duration-300 hover:-translate-y-30
+                  z-${index}
+                  `}
                 />
               ))}
             </div>
-            <div className="mr-4 flex flex-col">
+            <div className="flex flex-col relative items-center">
+              <Box label="Cross Seekers" />
               {Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
-                  className="-mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 border-4 border-yellow-100 rounded-lg flex items-center justify-center text-white text-2xl font-bold"
+                  className={`relative -mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 
+                  border-4 border-yellow-100 rounded-lg flex items-center justify-center
+                  text-white text-2xl font-bold transition-transform duration-300 hover:-translate-y-30
+                  z-${index}
+                  `}
                 />
               ))}
             </div>
-            <div className="mr-4">
+            <div className="flex flex-col relative items-center">
+              <Box label="Cross Seekers" />
               {Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
-                  className="-mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 border-4 border-yellow-100 rounded-lg flex items-center justify-center text-white text-2xl font-bold"
+                  className={`relative -mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 
+                  border-4 border-yellow-100 rounded-lg flex items-center justify-center
+                  text-white text-2xl font-bold transition-transform duration-300 hover:-translate-y-30
+                  z-${index}
+                  `}
                 />
               ))}
             </div>
