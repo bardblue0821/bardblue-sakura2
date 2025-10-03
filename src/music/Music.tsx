@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Background from './background.jpg';
 import BackgroundImage from '../common/BackgroundImage';
 import AudioPlayer from 'react-h5-audio-player';
@@ -17,55 +17,61 @@ const Music: React.FC = () => {
       container: waveformRef.current,
       waveColor: '#ffe066',
       progressColor: '#ffd700',
-      height: 80,
+      height: 120,
       barWidth: 2,
-      cursorColor: '#fff',
+      cursorColor: '#de3700ff',
     });
     wavesurfer.load(audioUrl);
     wavesurferRef.current = wavesurfer;
 
-    // wavesurfer側の再生位置変更をAudioPlayerに反映
-    // v6以降は'seek'イベントがなくなり、'interaction'で代用
-    const handleInteraction = () => {
-      const audio = audioPlayerRef.current?.audio?.current;
-      if (audio && wavesurfer.getDuration()) {
-        audio.currentTime = wavesurfer.getCurrentTime();
-      }
-    };
-    wavesurfer.on('interaction', handleInteraction);
-
-    // wavesurfer側の再生/停止をAudioPlayerに反映
-    const handlePlay = () => {
-      audioPlayerRef.current?.audio?.current?.play();
-    };
-    const handlePause = () => {
-      audioPlayerRef.current?.audio?.current?.pause();
-    };
-    wavesurfer.on('play', handlePlay);
-    wavesurfer.on('pause', handlePause);
-
     return () => {
-      wavesurfer.un('interaction', handleInteraction);
-      wavesurfer.un('play', handlePlay);
-      wavesurfer.un('pause', handlePause);
       wavesurfer.destroy();
     };
   }, []);
 
-  // AudioPlayer側の再生位置・再生/停止をwavesurferに反映
-  const handleAudioTimeUpdate = (e: any) => {
-    const audio = e.target;
-    const wavesurfer = wavesurferRef.current;
-    if (wavesurfer && Math.abs(wavesurfer.getCurrentTime() - audio.currentTime) > 0.1) {
-      wavesurfer.setTime(audio.currentTime);
-    }
-  };
-  const handleAudioPlay = () => {
-    wavesurferRef.current?.play();
-  };
-  const handleAudioPause = () => {
-    wavesurferRef.current?.pause();
-  };
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const PlayPauseButton = ({
+    isPlaying,
+    onPlay,
+    onPause,
+  }: {
+    isPlaying: boolean;
+    onPlay: () => void;
+    onPause: () => void;
+  }) => (
+    <button
+      className="w-24 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
+      onClick={isPlaying ? onPause : onPlay}
+      aria-label={isPlaying ? "Pause" : "Play"}
+    >
+      {isPlaying ? (
+        // Pauseアイコン
+        <svg xmlns="http://www.w3.org/2000/svg" className="inline-block w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="4" width="4" height="16" />
+          <rect x="14" y="4" width="4" height="16" />
+        </svg>
+      ) : (
+        // Playアイコン
+        <svg xmlns="http://www.w3.org/2000/svg" className="inline-block w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5,3 19,12 5,21" />
+        </svg>
+      )}
+    </button>
+  );
+
+  const VolumeControl = () => (
+    <input
+      type="range"
+      min={0}
+      max={1}
+      step={0.01}
+      defaultValue={1}
+      className="w-32 cursor-pointer accent-yellow-500 duration-300"
+      onChange={e => wavesurferRef.current?.setVolume(Number(e.target.value))}
+      title=""
+    />
+  );
 
   return (
     <>
@@ -76,35 +82,24 @@ const Music: React.FC = () => {
             ref={waveformRef}
             className="w-full max-h-full mb-4"
           />
-            {/* カスタム再生コントロール */}
             <div className="flex items-center gap-4 mt-2">
-              <button
-                className="w-24 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
-                onClick={() => wavesurferRef.current?.play()}
-              >
-                ▶
-              </button>
-              <button
-                className="w-24 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
-                onClick={() => wavesurferRef.current?.pause()}
-              >
-                ||
-              </button>
-              <input
-                type="range"
-                min={0}
-                max={1}
-                step={0.01}
-                defaultValue={1}
-                className="w-32 accent-yellow-500"
-                onChange={e => wavesurferRef.current?.setVolume(Number(e.target.value))}
-                title=""
+              <PlayPauseButton
+                isPlaying={isPlaying}
+                onPlay={() => {
+                  wavesurferRef.current?.play()
+                  setIsPlaying(true);
+                }}
+                onPause={() => {
+                  wavesurferRef.current?.pause()
+                  setIsPlaying(false);
+                }}
               />
+              <VolumeControl />
             </div>
           </div>
           <div className="text-yellow-100 min-h-[40%] justify-center w-full mb-8 px-4 flex">
             <div className="mr-4 flex flex-col">
-                {Array.from({ length: 5 }).map((_, index) => (
+              {Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
                   className={`relative -mb-58 w-[15rem] h-[15rem] bg-blue-500 my-2.5 
@@ -113,7 +108,7 @@ const Music: React.FC = () => {
                   z-${index}
                   `}
                 />
-                ))}
+              ))}
             </div>
             <div className="mr-4">
               {Array.from({ length: 5 }).map((_, index) => (

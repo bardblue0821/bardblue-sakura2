@@ -5,7 +5,8 @@ import Footer from './common/footer';
 import Illust from './illust/illust';
 import Vrchat from './vrchat/vrchat';
 import Bio from './bio/bio';
-import Music from './music/music';
+import Music from './music/Music';
+import Video from './video/Video';
 import Welcome from './welcome/Welcome';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/illust" element={<Illust />} />
             <Route path="/music" element={<Music />} />
             <Route path="/vrchat" element={<Vrchat />} />
+            <Route path="/video" element={<Video />} />
             <Route path="/bio" element={<Bio />} />
           </Routes>
         </main>

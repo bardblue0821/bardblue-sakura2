@@ -10,11 +10,12 @@ const Header: React.FC = () => {
         { to: "/illust", label: "Illust" },
         { to: "/music", label: "Music" },
         { to: "/vrchat", label: "VRChat" },
+        { to: "/video", label: "Video" },
         { to: "/bio", label: "About" },
     ];
     const selectedIdx = menu.findIndex(m => m.to === location.pathname);
     // メニューの幅・高さを固定（必要に応じて調整）
-    const itemWidth = 84; // px
+    const itemWidth = 60; // px
     const itemHeight = 32; // px
     return (
         <header className="w-full flex justify-center items-center en-regular">
@@ -24,9 +25,9 @@ const Header: React.FC = () => {
                         className="absolute left-0 top-8 -translate-y-1/2 rounded-md bg-yellow-800/50 
                         -z-10 transition-all duration-500"
                         style={{
-                            width: itemWidth,
+                            width: itemWidth + 12,
                             height: itemHeight,
-                            transform: `translateX(${selectedIdx * (itemWidth + 32)}px) translateY(-50%)`,
+                            transform: `translateX(${selectedIdx * (itemWidth + 32) - 6}px) translateY(-50%)`,
                         }}
                     />
                     {menu.map(({ to, label }, idx) => (
