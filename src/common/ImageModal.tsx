@@ -49,7 +49,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ items, index, onClose, setIndex
       onWheel={handleWheel}
     >
       <button
-        className={twButton + " left-4"}
+        className={twButton + " left-4 z-60 shadow-lg border border-yellow-700"}
         onClick={goPrev}
         aria-label="前の画像"
         tabIndex={0}
@@ -63,7 +63,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ items, index, onClose, setIndex
         onClick={e => e.stopPropagation()}
       />
       <button
-        className={twButton + " right-4"}
+        className={twButton + " right-4 z-60 shadow-lg border border-yellow-700"}
         onClick={goNext}
         aria-label="次の画像"
         tabIndex={0}

@@ -26,3 +26,4 @@ dist-ssr
 src/vrchat/photo/*
 src/illust/photo/*
 src/video/photo/*
+public/music/*
