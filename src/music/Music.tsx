@@ -6,12 +6,36 @@ import WaveSurfer from 'wavesurfer.js';
 const Music: React.FC = () => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const audioPlayerRef = useRef<any>(null);
-  const wavesurferRef = useRef<WaveSurfer|null>(null);
+  const wavesurferRef = useRef<WaveSurfer | null>(null);
   const audioFiles = [
     { label: "TimeTrain5", url: "./public/music/DigitalSignage/007-TimeTrain5.wav" },
     { label: "Sample1", url: "./public/music/DigitalSignage/Shamisen_Nation.mp3" },
     { label: "Sample2", url: "./public/music/DigitalSignage/石畳の街並み.mp3" },
   ];
+
+  const [currentTrack, setCurrentTrack] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // 曲が変わったらロードし直す
+  useEffect(() => {
+    if (!wavesurferRef.current) return;
+    wavesurferRef.current.load(audioFiles[currentTrack].url);
+    setIsPlaying(false);
+  }, [currentTrack]);
+
+  // 再生終了時に次の曲へ
+  useEffect(() => {
+    if (!wavesurferRef.current) return;
+    const ws = wavesurferRef.current;
+    const onFinish = () => {
+      handleNext();
+    };
+    ws.on('finish', onFinish);
+    return () => {
+      ws.un('finish', onFinish);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTrack]);
 
   useEffect(() => {
     if (!waveformRef.current) return;
@@ -29,9 +53,13 @@ const Music: React.FC = () => {
     return () => {
       wavesurfer.destroy();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  // 次の曲へ
+  const handleNext = () => {
+    setCurrentTrack((prev) => (prev + 1) % audioFiles.length);
+  };
 
   const PlayPauseButton = ({
     isPlaying,
@@ -59,6 +87,24 @@ const Music: React.FC = () => {
           <polygon points="5,3 19,12 5,21" />
         </svg>
       )}
+    </button>
+  );
+
+  // 次の曲ボタン
+  const NextButton = ({
+    onNext,
+  }: {
+    onNext: () => void;
+  }) => (
+    <button
+      className="w-24 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
+      onClick={onNext}
+      aria-label="Next"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="inline-block w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="7,6 17,12 7,18" />
+        <rect x="17" y="6" width="2" height="12" />
+      </svg>
     </button>
   );
 
@@ -131,7 +177,11 @@ const Music: React.FC = () => {
                   setIsPlaying(false);
                 }}
               />
+              <NextButton onNext={handleNext} />
               <VolumeControl />
+            </div>
+            <div className="mt-2 text-lg text-yellow-200">
+              {audioFiles[currentTrack].label}
             </div>
           </div>
           <div className="text-yellow-100 min-h-[40%] justify-center w-full gap-x-8 px-4 flex">
