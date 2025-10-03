@@ -14,6 +14,7 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
   const lastClosedIdx = useRef<number | null>(null);
   const imgRefs = useRef<HTMLImageElement[]>([]);
   const sortedItems = asc ? items : [...items].reverse();
+  const [load, setLoad] = useState(false);
 
   // モーダルを開く
   function openModal(idx: number) {
@@ -38,7 +39,10 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
 
   return (
     <>
-      <div className="px-8 py-4 h-full">
+      <div 
+        className={`px-8 py-4 h-full ${load ? "opacity-100" : "opacity-0"} duration-300`}
+        onLoad={(() => setLoad(true))}
+      >
         {/* 昇順/降順スイッチ */}
         <div className="mb-[10px] flex justify-end">
           <button
