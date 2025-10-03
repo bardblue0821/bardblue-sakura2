@@ -13,8 +13,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ items, index, onClose, setIndex
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') setIndex(idx => (idx - 1 + items.length) % items.length);
-      if (e.key === 'ArrowRight') setIndex(idx => (idx + 1) % items.length);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') setIndex(idx => (idx - 1 + items.length) % items.length);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') setIndex(idx => (idx + 1) % items.length);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);

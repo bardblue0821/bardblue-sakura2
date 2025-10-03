@@ -276,13 +276,16 @@ const Music: React.FC = () => {
   return (
     <>
       <BackgroundImage background={Background} />
-      <div className="flex flex-col h-full w-full px-8  items-center">
-        <div className="text-yellow-100 min-h-[50%]  w-full text-3xl en-bold mt-4 mb-8 flex flex-col items-center justify-center">
+      <div 
+        className="flex flex-col h-full w-full px-8  items-center"
+        style={{ animationDelay: '600ms', animationDuration: '600ms', animationFillMode: 'forwards', animationTimingFunction: 'ease-in-out' }}
+      >
+        <div className="text-yellow-100 min-h-[40%]  w-full text-3xl en-bold flex flex-col items-center justify-center">
           <div
             ref={waveformRef}
-            className="w-full max-h-full mb-4"
+            className="w-full max-h-full max-w-[800px] mb-8"
           />
-            <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-center gap-4 mt-2 mb-4">
               <PrevButton onPrev={handlePrev} />
               <PlayPauseButton
                 isPlaying={isPlaying}
@@ -305,11 +308,46 @@ const Music: React.FC = () => {
               <RepeatButton isRepeat={isRepeat} onToggle={() => setIsRepeat(r => !r)} />
               <VolumeControl />
             </div>
-            <div className="mt-2 text-lg text-yellow-200">
+            <div className="mt-4 mb-4 text-xl text-yellow-200">
               {audioFiles[currentTrack].label}
             </div>
           </div>
 
+          <div className="rounded-lg flex min-h-[60%] max-h-[60%] max-w-[800px] w-full">
+            {/* アルバムリスト */}
+            <div className="bg-yellow-900 p-4 min-w-[180px] flex flex-col gap-2 overflow-auto">
+              <div className="text-yellow-200 en-bold text-lg font-bold mb-2">Album List</div>
+              {Array.from(new Set(audioFiles.map(f => f.album))).map(album => (
+                <button
+                  key={album}
+                  className={`duration-300 en-regular cursor-pointer text-left px-2 py-1 rounded hover:bg-yellow-700/60 ${audioFiles[currentTrack].album === album ? 'bg-yellow-700 text-yellow-200' : 'text-yellow-200'}`}
+                  onClick={() => {
+                    // アルバムの最初の曲にジャンプ
+                    const idx = audioFiles.findIndex(f => f.album === album);
+                    if (idx !== -1) setCurrentTrack(idx);
+                  }}
+                >
+                  {album}
+                </button>
+              ))}
+            </div>
+            {/* トラックリスト */}
+            <div className="bg-yellow-900 flex-1 p-4 overflow-auto">
+              <div className="text-yellow-200 en-bold text-lg font-bold mb-2">Track List</div>
+              {audioFiles
+                .map((f, idx) => ({ ...f, idx }))
+                .filter(f => f.album === audioFiles[currentTrack].album)
+                .map(f => (
+                  <button
+                    key={f.label}
+                    className={`duration-300 block w-full cursor-pointer text-left px-2 py-1 rounded hover:bg-yellow-700/60 ${currentTrack === f.idx ? 'bg-yellow-700 text-yellow-200' : 'text-yellow-200'}`}
+                    onClick={() => setCurrentTrack(f.idx)}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+            </div>
+          </div>
           {/* record box
           <div className="text-yellow-100 min-h-[40%] justify-center w-full gap-x-8 px-4 flex">
             <div className="flex flex-col relative items-center">
