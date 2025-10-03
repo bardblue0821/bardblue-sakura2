@@ -56,10 +56,33 @@ const Music: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   // 次の曲へ
   const handleNext = () => {
     setCurrentTrack((prev) => (prev + 1) % audioFiles.length);
   };
+
+  // 前の曲へ
+  const handlePrev = () => {
+    setCurrentTrack((prev) => (prev - 1 + audioFiles.length) % audioFiles.length);
+  };
+  // 前の曲ボタン
+  const PrevButton = ({
+    onPrev,
+  }: {
+    onPrev: () => void;
+  }) => (
+    <button
+      className="w-24 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
+      onClick={onPrev}
+      aria-label="Previous"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="inline-block w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="17,6 7,12 17,18" />
+        <rect x="5" y="6" width="2" height="12" />
+      </svg>
+    </button>
+  );
 
   const PlayPauseButton = ({
     isPlaying,
@@ -160,6 +183,7 @@ const Music: React.FC = () => {
             className="w-full max-h-full mb-4"
           />
             <div className="flex items-center gap-4 mt-2">
+              <PrevButton onPrev={handlePrev} />
               <PlayPauseButton
                 isPlaying={isPlaying}
                 onPlay={() => {
