@@ -17,11 +17,18 @@ const Music: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
 
-  // 曲が変わったらロードし直す
+  // 曲が変わったらロードし直し、自動再生
   useEffect(() => {
     if (!wavesurferRef.current) return;
     wavesurferRef.current.load(audioFiles[currentTrack].url);
-    setIsPlaying(false);
+    // 直前が再生中なら自動再生
+    if (isPlaying) {
+      wavesurferRef.current.once('ready', () => {
+        wavesurferRef.current && wavesurferRef.current.play();
+      });
+    } else {
+      setIsPlaying(false);
+    }
   }, [currentTrack]);
 
   // 再生終了時に次の曲またはリピート
@@ -50,7 +57,7 @@ const Music: React.FC = () => {
     onToggle: () => void;
   }) => (
     <button
-      className={`w-24 cursor-pointer duration-300 ${isRepeat ? 'bg-yellow-600' : 'bg-yellow-800/80'} hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl`}
+      className={`w-12 cursor-pointer duration-300 ${isRepeat ? 'bg-yellow-600' : 'bg-yellow-800/80'} hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-2 rounded-xl`}
       onClick={onToggle}
       aria-label="Repeat One"
       title="1曲リピート"
@@ -100,7 +107,7 @@ const Music: React.FC = () => {
     onPrev: () => void;
   }) => (
     <button
-      className="w-24 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
+      className="w-12 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-2 rounded-xl"
       onClick={onPrev}
       aria-label="Previous"
     >
@@ -147,7 +154,7 @@ const Music: React.FC = () => {
     onNext: () => void;
   }) => (
     <button
-      className="w-24 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-4 rounded-xl"
+      className="w-12 cursor-pointer duration-300 bg-yellow-800/80 hover:bg-yellow-600 text-yellow-200 font-bold py-2 px-2 rounded-xl"
       onClick={onNext}
       aria-label="Next"
     >
