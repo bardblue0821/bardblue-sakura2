@@ -7,7 +7,11 @@ const Music: React.FC = () => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const audioPlayerRef = useRef<any>(null);
   const wavesurferRef = useRef<WaveSurfer|null>(null);
-  const audioUrl = "./public/music/DigitalSignage/007-TimeTrain5.wav";
+  const audioFiles = [
+    { label: "TimeTrain5", url: "./public/music/DigitalSignage/007-TimeTrain5.wav" },
+    { label: "Sample1", url: "./public/music/DigitalSignage/Shamisen_Nation.mp3" },
+    { label: "Sample2", url: "./public/music/DigitalSignage/石畳の街並み.mp3" },
+  ];
 
   useEffect(() => {
     if (!waveformRef.current) return;
@@ -19,7 +23,7 @@ const Music: React.FC = () => {
       barWidth: 2,
       cursorColor: '#de3700ff',
     });
-    wavesurfer.load(audioUrl);
+    wavesurfer.load(audioFiles[0].url);
     wavesurferRef.current = wavesurfer;
 
     return () => {
