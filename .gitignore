@@ -27,3 +27,7 @@ src/vrchat/photo/*
 src/illust/photo/*
 src/video/photo/*
 public/music/*
+public/img-illust/*
+public/img-illust-thumb/*
+public/img-vrchat/*
+public/img-vrchat-thumb/*

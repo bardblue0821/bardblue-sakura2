@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './common/Header';
 import Footer from './common/footer';
 import Illust from './illust/illust';
-import Vrchat from './vrchat/vrchat';
+import Vrchat from './vrchat/Vrchat';
 import Bio from './bio/bio';
 import Music from './music/Music';
 import Video from './video/Video';

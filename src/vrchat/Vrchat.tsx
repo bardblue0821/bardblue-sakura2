@@ -1,20 +1,17 @@
-/// <reference types="vite/client" />
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 import Background from './background.png';
 import BackgroundImage from '../common/BackgroundImage';
 import Gallery from '../common/Gallery';
-import { ImageItem } from '../common/types';
-import { getGalleryItems } from '../common/getGalleryItems';
-
-// 画像リスト取得
-const items: ImageItem[] = getGalleryItems();
+import getJsonVrchat from "./getJsonVrchat";
+import { imgJson } from '../type';
 
 const Vrchat: React.FC = () => {
+  const json: imgJson[] = getJsonVrchat();
 
   return (
     <>
       <BackgroundImage background={Background} />
-      <Gallery items={items} />
+      <Gallery json={json} />
     </>
   );
 };
