@@ -35,12 +35,13 @@ function App() {
 
         <main className="flex-1 h-[calc(100vh-140px)]">
           <Routes>
-            <Route path="/" element={<Navigate to="/illust" replace />} />
-            <Route path="/illust" element={<Illust />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/vrchat" element={<Vrchat />} />
-            <Route path="/video" element={<Video />} />
-            <Route path="/bio" element={<Bio />} />
+            <Route path="/" element={<Navigate to="/home/illust" replace />} />
+            <Route path="/home/" element={<Navigate to="/home/illust" replace />} />
+            <Route path="/home/illust" element={<Illust />} />
+            <Route path="/home/music" element={<Music />} />
+            <Route path="/home/vrchat" element={<Vrchat />} />
+            <Route path="/home/video" element={<Video />} />
+            <Route path="/home/bio" element={<Bio />} />
           </Routes>
         </main>
         

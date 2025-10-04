@@ -3,15 +3,16 @@ import React from 'react';
 import Icon from './icon.jpg';
 
 const twFont="text-yellow-100 hover:text-yellow-500 duration-300";
+const selectedIdx = 0; 
 
 const Header: React.FC = () => {
     const location = useLocation();
     const menu = [
-        { to: "/illust", label: "Illust" },
-        { to: "/music", label: "Music" },
-        { to: "/vrchat", label: "VRChat" },
-        { to: "/video", label: "Video" },
-        { to: "/bio", label: "About" },
+        { to: "/home/illust", label: "Illust" },
+        { to: "/home/music", label: "Music" },
+        { to: "/home/vrchat", label: "VRChat" },
+        { to: "/home/video", label: "Video" },
+        { to: "/home/bio", label: "About" },
     ];
     const selectedIdx = menu.findIndex(m => m.to === location.pathname);
     // メニューの幅・高さを固定（必要に応じて調整）
@@ -37,7 +38,7 @@ const Header: React.FC = () => {
                     ))}
                 </span>
                 <span className="flex items-center">
-                    <Link to="/bio" className="mx-2">
+                    <Link to="/home/bio" className="mx-2">
                         <img src={Icon} alt="Profile Icon" className="rounded-full w-7 h-7" />
                     </Link>
                 </span>

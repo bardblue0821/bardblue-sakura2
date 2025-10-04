@@ -7,15 +7,15 @@ const Music: React.FC = () => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const audioPlayerRef = useRef<any>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
-  const audioFiles = [
-    { album: "DigitalSignage", label: "Digital Signage - Milkyway Train", url: "./public/music/DigitalSignage/007-TimeTrain54.mp3" },
+  {/*const audioFiles = [
+    { album: "DigitalSignage", label: "Digital Signage - Milkyway Train",    url: "./public/music/DigitalSignage/007-TimeTrain54.mp3" },
     { album: "DigitalSignage", label: "Digital Signage - Don't Wake Me Up",  url: "./public/music/DigitalSignage/008-NobodyWakesMeUp41.mp3" },
-    { album: "DigitalSignage", label: "Digital Signage - Sink In Winter", url: "./public/music/DigitalSignage/020-huyunisizumu_4.mp3" },
-    { album: "DigitalSignage", label: "Digital Signage - Leave As It Is", url: "./public/music/DigitalSignage/033-leaveAsItIs_4.mp3" },
-    { album: "DigitalSignage", label: "Digital Signage - Late Show", url: "./public/music/DigitalSignage/056-nighter_52.mp3" },
-    { album: "DigitalSignage", label: "Digital Signage - Snowflake", url: "./public/music/DigitalSignage/060-Fullmoon_6.wav" },
-    { album: "DigitalSignage", label: "Digital Signage - Rainy Aquarium", url: "./public/music/DigitalSignage/067-dream.mp3" },
-    
+    { album: "DigitalSignage", label: "Digital Signage - Sink In Winter",    url: "./public/music/DigitalSignage/020-huyunisizumu_4.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Leave As It Is",    url: "./public/music/DigitalSignage/033-leaveAsItIs_4.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Late Show",         url: "./public/music/DigitalSignage/056-nighter_52.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Snowflake",         url: "./public/music/DigitalSignage/060-Fullmoon_6.wav" },
+    { album: "DigitalSignage", label: "Digital Signage - Rainy Aquarium",    url: "./public/music/DigitalSignage/067-dream.mp3" },
+
     { album: "Kaze", label: "風 - 黄金色", url: "./public/music/Kaze/Sunset2-004.mp3" },
     { album: "Kaze", label: "風 - 点描画 (WIP)", url: "./public/music/Kaze/Scatterred.wav" },
     { album: "Kaze", label: "風 - レインセンサー", url: "./public/music/Kaze/NightRain_601.wav" },
@@ -77,6 +77,77 @@ const Music: React.FC = () => {
     { album: "3rd Life", label: "3rd Life - 日常？ (6章 忘れないで アエテルヌム中枢都市 フィールド曲)", url: "./public/music/3rdLife/125-Henge.mp3" },
     { album: "3rd Life", label: "3rd Life - 月に触れる (6章 忘れないで ポール フィールド曲)", url: "./public/music/Ghost/107-Dont touch the moon 02.mp3" },
 
+  ];*/}
+
+  const audioFiles = [
+    { album: "DigitalSignage", label: "Digital Signage - Milkyway Train",    url: "/home/music/DigitalSignage/007-TimeTrain54.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Don't Wake Me Up",  url: "/home/music/DigitalSignage/008-NobodyWakesMeUp41.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Sink In Winter",    url: "/home/music/DigitalSignage/020-huyunisizumu_4.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Leave As It Is",    url: "/home/music/DigitalSignage/033-leaveAsItIs_4.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Late Show",         url: "/home/music/DigitalSignage/056-nighter_52.mp3" },
+    { album: "DigitalSignage", label: "Digital Signage - Snowflake",         url: "/home/music/DigitalSignage/060-Fullmoon_6.wav" },
+    { album: "DigitalSignage", label: "Digital Signage - Rainy Aquarium",    url: "/home/music/DigitalSignage/067-dream.mp3" },
+
+    { album: "Kaze", label: "風 - 黄金色", url: "/home/music/Kaze/Sunset2-004.mp3" },
+    { album: "Kaze", label: "風 - 点描画 (WIP)", url: "/home/music/Kaze/Scatterred.wav" },
+    { album: "Kaze", label: "風 - レインセンサー", url: "/home/music/Kaze/NightRain_601.wav" },
+
+    { album: "Cross Seekers", label: "Cross Seekers - メインテーマ", url: "/home/music/CrossSeekers/057-monox_8.wav" },
+    { album: "Cross Seekers", label: "Cross Seekers - 草原 (通常)", url: "/home/music/CrossSeekers/field_4_wet_2loop_valorous-trimmed.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 草原 (休憩)", url: "/home/music/CrossSeekers/field_4_wet_2loop_profundity-trimed.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 草原 (戦闘)", url: "/home/music/CrossSeekers/field_4_wet_2loop_trepidation-trimmed.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - レオルのテーマ", url: "/home/music/CrossSeekers/Leol7.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - ダンジョン (通常)", url: "/home/music/CrossSeekers/caveA-ambient.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - ダンジョン (戦闘)", url: "/home/music/CrossSeekers/caveA-assault.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 森", url: "/home/music/CrossSeekers/Clock.wav" },
+    { album: "Cross Seekers", label: "Cross Seekers - エレナのテーマ", url: "/home/music/CrossSeekers/erena2.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 雪山 (通常)", url: "/home/music/CrossSeekers/Icebarn-valorous02.wav" },
+    { album: "Cross Seekers", label: "Cross Seekers - 雪山 (休憩)", url: "/home/music/CrossSeekers/Icebarn-profundity02.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 雪山 (戦闘)", url: "/home/music/CrossSeekers/Icebarn-trepidation02.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - イーヴのテーマ", url: "/home/music/CrossSeekers/Eeve4.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - ボス戦", url: "/home/music/CrossSeekers/boss5_3_mid.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 洞窟 (通常)", url: "/home/music/CrossSeekers/ForgottenIllusions-ambient.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 洞窟 (戦闘)", url: "/home/music/CrossSeekers/ForgottenIllusions-assault.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 教会", url: "/home/music/CrossSeekers/notation.mp3" },
+    { album: "Cross Seekers", label: "Cross Seekers - 遺跡 (通常)", url: "/home/music/CrossSeekers/myth-valorous02.wav" },
+    { album: "Cross Seekers", label: "Cross Seekers - 遺跡 (戦闘)", url: "/home/music/CrossSeekers/myth-trepidation02.wav" },
+    { album: "Cross Seekers", label: "Cross Seekers - 記憶の道", url: "/home/music/CrossSeekers/Sorcery2.mp3" },
+
+    { album: "Mimikopi", label: "FFTA2 - ルッソ", url: "/home/music/Mimikopi/Luso2-1.wav" },
+    { album: "Mimikopi", label: "FFTA2 - 緑の風", url: "/home/music/Mimikopi/緑の風_7.mp3" },
+    { album: "Mimikopi", label: "FFTA2 - 丘を越えて", url: "/home/music/Mimikopi/丘を越えて.mp3" },
+    { album: "Mimikopi", label: "FFTA - 希望への戦い", url: "/home/music/Mimikopi/BattleOfHope2.mp3" },
+    { album: "Mimikopi", label: "FFTA - 異世界イヴァリース", url: "/home/music/Mimikopi/異世界イヴァリース6.mp3" },
+    { album: "Mimikopi", label: "FFTA - 種族をこえた仲間たち", url: "/home/music/Mimikopi/CompanionsThatSurpassedTheirTribe.mp3" },
+    { album: "Mimikopi", label: "FFTA - 苦しい戦い", url: "/home/music/Mimikopi/苦しい戦い2-04.wav" },
+    { album: "Mimikopi", label: "FFTA - 荒野の向こう", url: "/home/music/Mimikopi/荒野の向こう.mp3" },
+    { album: "Mimikopi", label: "FFTA - 集まる仲間たち", url: "/home/music/Mimikopi/集まる仲間たち8.wav" },
+    { album: "Mimikopi", label: "FFTA - 白い花", url: "/home/music/Mimikopi/白い花22-4.mp3" },
+    { album: "Mimikopi", label: "FFT - Remnants (づんづん)", url: "/home/music/Mimikopi/Remnants_3.mp3" },
+    { album: "Mimikopi", label: "FFT - Trisection (突撃軍曹)", url: "/home/music/Mimikopi/Trisection02.mp3" },
+
+    { album: "3rd Life", label: "3rd Life - 古紙の香り (1章 動き出す世界 ファタ・モルガナ雨林 非戦闘エリア曲)", url: "/home/music/3rdLife/119-SmellOfTheOldStory2.mp3" },
+    { album: "3rd Life", label: "3rd Life - 悠久の緑 (1章 動き出す世界 ファタ・モルガナ雨林 フィールド曲)", url: "/home/music/3rdLife/117-Permanent Green.mp3" },
+    { album: "3rd Life", label: "3rd Life - 緑の怪物 (1章 動き出す世界 ファタ・モルガナ雨林 戦闘曲)", url: "/home/music/Ghost/089-Lime Green Convertion.mp3" },
+    { album: "3rd Life", label: "3rd Life - 川下り (1章 動き出す世界 ウェール原生林 フィールド曲)", url: "/home/music/3rdLife/127-rainforest.mp3" },
+    { album: "3rd Life", label: "3rd Life - 灼熱の道 (2章 静かな躍動 プルルムラウム化石地域 フィールド曲)", url: "/home/music/3rdLife/idea64-4-IncandecsentTrail.mp3" },
+    { album: "3rd Life", label: "3rd Life - 重機協奏 (2章 静かな躍動 山岳都市エブル 非戦闘エリア曲)", url: "/home/music/3rdLife/idea48-The Shaft.mp3" },
+    { album: "3rd Life", label: "3rd Life - 地底湖 (2章 静かな躍動 プラキド火山 フィールド曲)", url: "/home/music/3rdLife/124-AlongTheLakeside.mp3" },
+    { album: "3rd Life", label: "3rd Life - 心の声 (中ボス戦闘曲)", url: "/home/music/Ghost/058-Mind Reading.mp3" },
+    { album: "3rd Life", label: "3rd Life - 山の血潮 (2章 静かな躍動 プラキド火山 フィールド曲)", url: "/home/music/3rdLife/126-Ravine.mp3" },
+    { album: "3rd Life", label: "3rd Life - 銀沙灘 (3章 失われた色 アラケル銀山地区 非戦闘エリア曲)", url: "/home/music/Ghost/115-Ginshadan.mp3" },
+    { album: "3rd Life", label: "3rd Life - 霊峰 (3章 失われた色 カエルラ上層地殻変動地帯 フィールド曲)", url: "/home/music/3rdLife/122-Monotonous.mp3" },
+    { album: "3rd Life", label: "3rd Life - 青い眼の狼 (3章 失われた色 カエルラ上層地殻変動地帯 戦闘曲)", url: "/home/music/Ghost/204-Big Room House 2.mp3" },
+    { album: "3rd Life", label: "3rd Life - 旧坑道 (3章 失われた色 アルジンタム鉱山遺跡 フィールド曲)", url: "/home/music/3rdLife/418-QuietDynamism.mp3" },
+    { album: "3rd Life", label: "3rd Life - 水晶の森 (4章 光望む岬 鳴瑰𥔎 フィールド曲)", url: "/home/music/3rdLife/idea54-Crystal Woods.mp3" },
+    { album: "3rd Life", label: "3rd Life - 千本鳥居 (4章 光望む岬 非天城塞 フィールド曲)", url: "/home/music/3rdLife/120-ToriiSequence.mp3" },
+    { album: "3rd Life", label: "3rd Life - 魂の通り道 (4章 光望む岬 非天城塞 フィールド曲)", url: "/home/music/Ghost/003-FortOfTheSun.mp3" },
+    { album: "3rd Life", label: "3rd Life - 絡繰り人形 (4章 光望む岬 非天城塞 戦闘曲)", url: "/home/music/Ghost/247-Robots(Hiten).mp3" },
+    { album: "3rd Life", label: "3rd Life - 曇った鏡 (5章 守人の願い 修道院残影 フィールド曲)", url: "/home/music/3rdLife/121-DazzlingMirror.mp3" },
+    { album: "3rd Life", label: "3rd Life - 守人の願い (5章 守人の願い 修道院残影 フィールド曲)", url: "/home/music/3rdLife/206-Spring.mp3" },
+    { album: "3rd Life", label: "3rd Life - 見えざる者 (5章 守人の願い 修道院残影 戦闘曲)", url: "/home/music/Ghost/246-Something Soul.mp3" },
+    { album: "3rd Life", label: "3rd Life - 日常？ (6章 忘れないで アエテルヌム中枢都市 フィールド曲)", url: "/home/music/3rdLife/125-Henge.mp3" },
+    { album: "3rd Life", label: "3rd Life - 月に触れる (6章 忘れないで ポール フィールド曲)", url: "/home/music/Ghost/107-Dont touch the moon 02.mp3" },
   ];
 
   const [currentTrack, setCurrentTrack] = useState(0);
