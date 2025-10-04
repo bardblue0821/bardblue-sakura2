@@ -2,8 +2,8 @@ import os
 from PIL import Image
 
 # 入力ディレクトリと出力ディレクトリを指定
-input_dir = 'img-illust'  # 変えたい場合はここを修正
-output_dir = 'img-illust-thumb'
+input_dir = 'img-vrchat'  # 変えたい場合はここを修正
+output_dir = 'img-vrchat-thumb'
 
 os.makedirs(output_dir, exist_ok=True)
 

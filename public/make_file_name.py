@@ -3,8 +3,8 @@ import json
 import re
 
 # 対象ディレクトリ
-original_dir = 'img-illust'
-thumb_dir = 'img-illust-thumb'
+original_dir = 'img-vrchat'
+thumb_dir = 'img-vrchat-thumb'
 
 output_file = 'filename.json'
 

@@ -128,6 +128,7 @@ const getJsonIllust = () => {
       "original": "img-illust/zfh-heRU_400x400.jpg",
       "thumb": "img-illust-thumb/zfh-heRU_400x400.jpg"
     },
+    /*
     {
       "filename": "それせいかい.png",
       "original": "img-illust/それせいかい.png",
@@ -662,7 +663,7 @@ const getJsonIllust = () => {
       "filename": "雨上がり2.png",
       "original": "img-illust/雨上がり2.png",
       "thumb": "img-illust-thumb/雨上がり2.png"
-    }
+    }*/
   ]
 };
 
