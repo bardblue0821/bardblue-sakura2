@@ -154,7 +154,7 @@ const Music: React.FC = () => {
                   .map(f => (
                     <button
                       key={f.label}
-                      className={`duration-300 block w-full cursor-pointer en-regular 
+                      className={`duration-300 block w-full cursor-pointer en-regular mb-1
                         text-left px-2 py-1 rounded hover:bg-yellow-700/60 
                         ${currentTrack === f.idx ? 'bg-yellow-700 text-yellow-200' : 'text-yellow-200'}`}
                       onClick={() => setCurrentTrack(f.idx)}
