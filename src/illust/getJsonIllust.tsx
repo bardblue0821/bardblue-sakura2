@@ -9,7 +9,6 @@ const getJsonIllust = () => {
       "filename": "1691494566891.png",
       "original": "img-illust/1691494566891.png",
       "thumb": "img-illust-thumb/1691494566891.png",
-      "year": 1691,
       "month": 49,
       "day": 45
     },
@@ -57,11 +56,6 @@ const getJsonIllust = () => {
       "filename": "amanogawamiku3minikuro.png",
       "original": "img-illust/amanogawamiku3minikuro.png",
       "thumb": "img-illust-thumb/amanogawamiku3minikuro.png"
-    },
-    {
-      "filename": "anotherworldivalice.mp4",
-      "original": "img-illust/anotherworldivalice.mp4",
-      "thumb": null
     },
     {
       "filename": "asty.jpg",

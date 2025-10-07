@@ -14,12 +14,19 @@ const Header: React.FC = () => {
         { to: "/home/video", label: "Video" },
         { to: "/home/bio", label: "About" },
     ];
-    const selectedIdx = menu.findIndex(m => m.to === location.pathname);
+    
+    // /home/music で始まる場合は Music を選択
+    let selectedIdx = menu.findIndex(m => m.to === location.pathname);
+    if (location.pathname.startsWith('/home/music')) {
+        selectedIdx = menu.findIndex(m => m.to === '/home/music');
+    }
+
     // メニューの幅・高さを固定（必要に応じて調整）
     const itemWidth = 60; // px
     const itemHeight = 32; // px
+
     return (
-        <header className="w-full flex justify-center items-center en-regular">
+        <header className="mt-8 w-full flex justify-center items-center en-regular">
             <div className="flex justify-between items-center w-full px-8">
                 <span className="justify-center relative flex gap-8" style={{height: itemHeight}}>
                     <span
