@@ -11,7 +11,12 @@ const Vrchat: React.FC = () => {
   return (
     <>
       <BackgroundImage background={Background} />
-      <Gallery json={json} />
+      <div 
+        className="text-yellow-200 h-full w-full gap-y-8 px-8 flex flex-col items-center"
+        style={{ animationDelay: '600ms', animationDuration: '600ms', animationFillMode: 'forwards', animationTimingFunction: 'ease-in-out' }}
+      >
+        <Gallery json={json} />
+      </div>
     </>
   );
 };

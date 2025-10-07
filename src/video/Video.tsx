@@ -1,9 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Background from './background.jpg';
 import BackgroundImage from '../common/BackgroundImage';
-import Gallery from '../common/Gallery';
-import { ImageItem } from '../common/types';
-import { getGalleryItems } from '../common/getGalleryItems';
 
 const Video: React.FC = () => {
   return (

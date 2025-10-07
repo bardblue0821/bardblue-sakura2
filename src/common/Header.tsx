@@ -26,7 +26,7 @@ const Header: React.FC = () => {
     const itemHeight = 32; // px
 
     return (
-        <header className="mt-8 w-full flex justify-center items-center en-regular">
+        <header className="w-full flex justify-center items-center en-regular">
             <div className="flex justify-between items-center w-full px-8">
                 <span className="justify-center relative flex gap-8" style={{height: itemHeight}}>
                     <span

@@ -18,7 +18,10 @@ const Music: React.FC = () => {
   const wavesurferRef = useRef<WaveSurfer | null>(null);
 
   const [currentAlbum, setcurrentAlbum] = useState(audioFiles[0].album);
-  const [currentTrack, setCurrentTrack] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState(() => {
+    const saved = localStorage.getItem('lastTrack');
+    return saved ? Number(saved) : 0;
+  });
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
@@ -73,6 +76,7 @@ const Music: React.FC = () => {
     // 曲が切り替わるたびにURLに曲名を反映
     const safeLabel = audioFiles[currentTrack].label.replace(/\s+/g, '');
     navigate(`/home/music/${safeLabel}`);
+    localStorage.setItem('lastTrack', String(currentTrack));
   }, [currentTrack]);
   
   // 次の曲へ
@@ -92,7 +96,7 @@ const Music: React.FC = () => {
     <>
       <BackgroundImage background={Background} />
       <div 
-        className="flex flex-col h-full w-full px-8  items-center"
+        className="text-yellow-200 h-full w-full gap-y-8 px-8 flex flex-col items-center"
         style={{ animationDelay: '600ms', animationDuration: '600ms', animationFillMode: 'forwards', animationTimingFunction: 'ease-in-out' }}
       >
         <div className="text-yellow-100 min-h-[40%]  w-full text-3xl en-bold flex flex-col items-center justify-center">
@@ -123,12 +127,12 @@ const Music: React.FC = () => {
               <RepeatButton isRepeat={isRepeat} onToggle={() => setIsRepeat(r => !r)} />
               <VolumeSlider volume={volume} setVolume={setVolume} wavesurferRef={wavesurferRef} />
             </div>
-            <div className="mt-4 mb-12 text-xl text-yellow-200">
+            <div className="mt-4 text-xl text-yellow-200">
               {audioFiles[currentTrack].label}
             </div>
           </div>
 
-          <div className="rounded-lg flex min-h-[60%] max-h-[60%] max-w-[800px] w-full">
+          <div className="rounded-lg flex min-h-[55%] max-h-[55%] max-w-[800px] w-full">
             {/* アルバムリスト */}
             <div className="bg-yellow-900/60 p-4 min-w-[180px] flex-col gap-2 ">
               <div className="text-yellow-200 en-bold text-lg font-bold mb-2">Album</div>

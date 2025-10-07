@@ -43,8 +43,8 @@ const Gallery: React.FC<{ json: imgJson[] }> = ({ json }) => {
   const years = Object.keys(grouped).sort((a, b) => orderDesc ? b.localeCompare(a) : a.localeCompare(b));
 
   return (
-    <div className="px-8 mt-4 h-[95%]">
-      <div className="mt-4 w-full flex justify-end gap-4">
+    <div className="">
+      <div className="w-full flex justify-end gap-4">
         <button
           className="text-yellow-700/80 hover:text-yellow-200 cursor-pointer duration-300"
           onClick={() => setOrderDesc(!orderDesc)}
@@ -52,7 +52,7 @@ const Gallery: React.FC<{ json: imgJson[] }> = ({ json }) => {
           {orderDesc ? '▼' : '▲'}
         </button>
       </div>
-      <div className="pr-2 mt-2 h-full w-full overflow-auto">
+      <div className="h-[80vh] px-2 mt-2 w-full overflow-auto">
         {years.map(year => (
           <div key={year} className="mb-8">
             <div className="text-9xl font-bold en-bold text-yellow-200/90 mb-4">{year}</div>
