@@ -43,7 +43,7 @@ const Gallery: React.FC<{ json: imgJson[] }> = ({ json }) => {
   const years = Object.keys(grouped).sort((a, b) => orderDesc ? b.localeCompare(a) : a.localeCompare(b));
 
   return (
-    <div className="">
+    <div className="h-[90vh] overflow-hidden">
       <div className="w-full flex justify-end gap-4">
         <button
           className="text-yellow-700/80 hover:text-yellow-200 cursor-pointer duration-300"
