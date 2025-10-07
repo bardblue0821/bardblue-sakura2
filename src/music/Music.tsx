@@ -85,7 +85,7 @@ const Music: React.FC = () => {
     setCurrentTrack((prev) => (prev - 1 + audioFiles.length) % audioFiles.length);
   };
 
-  const [volume, setVolume] = useState(0.7); // 初期音量を50%に設定
+  const [volume, setVolume] = useState(1);
 
 
   return (
