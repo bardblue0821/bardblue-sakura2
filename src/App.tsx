@@ -39,6 +39,7 @@ function App() {
             <Route path="/home/" element={<Navigate to="/home/illust" replace />} />
             <Route path="/home/illust" element={<Illust />} />
             <Route path="/home/music" element={<Music />} />
+            <Route path="/home/music/:track" element={<Music />} />
             <Route path="/home/vrchat" element={<Vrchat />} />
             <Route path="/home/video" element={<Video />} />
             <Route path="/home/bio" element={<Bio />} />

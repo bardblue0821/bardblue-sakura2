@@ -9,6 +9,7 @@ import PrevButton from './PrevButton';
 import NextButton from './NextButton';
 import RepeatButton from './RepeatButton';
 import VolumeSlider from './VolumeSlider';
+import { useNavigate } from 'react-router-dom';
 
 const Music: React.FC = () => {
   const audioFiles = getJsonMusic();
@@ -21,6 +22,8 @@ const Music: React.FC = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
+
+  const navigate = useNavigate();
 
   // 曲ロード・自動再生
   const loadTrack = () => {
@@ -66,6 +69,11 @@ const Music: React.FC = () => {
   useEffect(loadTrack, [currentTrack]);
   useEffect(setupFinishHandler, [currentTrack, isRepeat]);
   useEffect(initWaveSurfer, []);
+  useEffect(() => {
+    // 曲が切り替わるたびにURLに曲名を反映
+    const safeLabel = audioFiles[currentTrack].label.replace(/\s+/g, '');
+    navigate(`/home/music/${safeLabel}`);
+  }, [currentTrack]);
   
   // 次の曲へ
   const handleNext = () => {
