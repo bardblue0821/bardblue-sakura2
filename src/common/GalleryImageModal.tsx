@@ -75,7 +75,7 @@ const GalleryImageModal: React.FC = () => {
       <div className="min-w-full max-w-full max-h-screen min-h-screen 
         p-8 flex flex-col items-center justify-center">
         <img
-          src={img.original}
+          src={`../${img.original}`}
           alt={img.filename}
           className="max-w-[90%] max-h-[90vh] object-contain mx-auto"
           onClick={e => e.stopPropagation()}

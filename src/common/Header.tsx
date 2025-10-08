@@ -20,6 +20,12 @@ const Header: React.FC = () => {
     if (location.pathname.startsWith('/home/music')) {
         selectedIdx = menu.findIndex(m => m.to === '/home/music');
     }
+    if (location.pathname.startsWith('/home/vrchat')) {
+        selectedIdx = menu.findIndex(m => m.to === '/home/vrchat');
+    }
+    if (location.pathname.startsWith('/home/illust')) {
+        selectedIdx = menu.findIndex(m => m.to === '/home/illust');
+    }
 
     // メニューの幅・高さを固定（必要に応じて調整）
     const itemWidth = 60; // px
