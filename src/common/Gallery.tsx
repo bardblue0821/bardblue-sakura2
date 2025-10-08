@@ -2,33 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import Masonry from 'react-masonry-css';
 import GalleryImageModal from './GalleryImageModal';
 
-type imgJson = {
-  filename: string,
-  original: string,
-  thumb   : string,
-  year?   : number,
-  month?  : number,
-  day?    : number,
-  hour?   : number,
-  minute? : number,
-  second? : number,
+import { imgJson } from '../type';
+
+type GalleryProps = {
+  json: imgJson[];
+  onImageClick: (imageName: string) => void;
 };
 
-const Gallery: React.FC<{ json: imgJson[] }> = ({ json }) => {
-
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+const Gallery: React.FC<GalleryProps> = ({ json, onImageClick }) => {
   const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
-
-  const handleImgClick = (idx: number) => {
-    setSelectedIndex(idx);
-  };
-
-  const handleClose = () => {
-    if (selectedIndex !== null && imgRefs.current[selectedIndex]) {
-      imgRefs.current[selectedIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    setSelectedIndex(null);
-  };
 
   // yearごとにグループ化
   const grouped: { [year: string]: imgJson[] } = {};
@@ -64,10 +46,10 @@ const Gallery: React.FC<{ json: imgJson[] }> = ({ json }) => {
               {grouped[year].map((img: imgJson, idx: number) => (
                 <img
                   key={img.filename}
-                  src={img.thumb}
+                  src={img.thumb ?? undefined}
                   alt={img.filename}
                   className="w-full mb-2 transition-transform duration-300 hover:scale-105 cursor-pointer hover:grayscale-20 grayscale-50"
-                  onClick={() => handleImgClick(json.indexOf(img))}
+                  onClick={() => onImageClick(img.filename)}
                   ref={el => { imgRefs.current[json.indexOf(img)] = el; }}
                   loading="lazy"
                 />
@@ -75,15 +57,6 @@ const Gallery: React.FC<{ json: imgJson[] }> = ({ json }) => {
             </Masonry>
           </div>
         ))}
-
-        {selectedIndex !== null && (
-          <GalleryImageModal
-            json={json}
-            currentIndex={selectedIndex}
-            setCurrentIndex={setSelectedIndex}
-            onClose={handleClose}
-          />
-        )}
       </div>
     </div>
   );

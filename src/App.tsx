@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './common/Header';
 import Footer from './common/footer';
 import Illust from './illust/illust';
+import GalleryImageModal from './common/GalleryImageModal';
 import Vrchat from './vrchat/Vrchat';
 import Bio from './bio/bio';
 import Music from './music/Music';
@@ -37,10 +38,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/home/illust" replace />} />
             <Route path="/home/" element={<Navigate to="/home/illust" replace />} />
-            <Route path="/home/illust" element={<Illust />} />
+            <Route path="/home/illust" element={<Illust />}>
+              <Route path=":imageName" element={<GalleryImageModal />} />
+            </Route>
             <Route path="/home/music" element={<Music />} />
             <Route path="/home/music/:track" element={<Music />} />
-            <Route path="/home/vrchat" element={<Vrchat />} />
+            <Route path="/home/vrchat" element={<Vrchat />}>
+              <Route path=":imageName" element={<GalleryImageModal />} />
+            </Route>
             <Route path="/home/video" element={<Video />} />
             <Route path="/home/bio" element={<Bio />} />
           </Routes>

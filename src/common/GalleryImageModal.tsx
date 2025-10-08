@@ -1,29 +1,33 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { imgJson } from '../type';
+import getJsonIllust from '../illust/getJsonIllust';
 import ShareButton from './ShareButton';
 
-type imgJson = {
-  filename: string,
-  original: string,
-  thumb   : string,
-  year?   : number,
-  month?  : number,
-  day?    : number,
-  hour?   : number,
-  minute? : number,
-  second? : number,
-};
-
-type GalleryImageModalProps = {
-  json: imgJson[];
-  currentIndex: number;
-  setCurrentIndex: React.Dispatch<React.SetStateAction<number | null>>;
-  onClose: () => void;
-};
-
-const GalleryImageModal: React.FC<GalleryImageModalProps> = ({ json, currentIndex, setCurrentIndex, onClose }) => {
+const GalleryImageModal: React.FC = () => {
+  const { imageName } = useParams();
+  const navigate = useNavigate();
+  const json: imgJson[] = getJsonIllust();
+  const currentIndex = json.findIndex(img => img.filename === imageName);
+  if (currentIndex === -1) return null;
   const img = json[currentIndex];
-  const next = () => setCurrentIndex(idx => (idx !== null && idx < json.length - 1 ? idx + 1 : idx));
-  const prev = () => setCurrentIndex(idx => (idx !== null && idx > 0 ? idx - 1 : idx));
+
+  // モーダルの閉じる処理
+  const handleClose = () => {
+    navigate('/home/illust');
+  };
+
+  // 画像切り替え（URLも更新）
+  const next = () => {
+    if (currentIndex < json.length - 1) {
+      navigate(`/home/illust/${json[currentIndex + 1].filename}`);
+    }
+  };
+  const prev = () => {
+    if (currentIndex > 0) {
+      navigate(`/home/illust/${json[currentIndex - 1].filename}`);
+    }
+  };
   const ChangeImageButton: React.FC<{ direction: 'next' | 'prev' }> = ({ direction }) => {
     const tw = direction === 'next' ? 'right-4' : 'left-4';
     const mark = direction === 'next' ? '▶' : '◀';
@@ -39,16 +43,6 @@ const GalleryImageModal: React.FC<GalleryImageModalProps> = ({ json, currentInde
     );
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [json.length, onClose, setCurrentIndex]);
-
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (e.deltaY > 0) next();
@@ -58,7 +52,7 @@ const GalleryImageModal: React.FC<GalleryImageModalProps> = ({ json, currentInde
   return (
     <div
       className="fixed inset-0 bg-black/80 flex items-center backdrop-blur justify-center z-50"
-      onClick={onClose}
+      onClick={handleClose}
       onWheel={handleWheel}
     >
       {/* 左ボタン */}
