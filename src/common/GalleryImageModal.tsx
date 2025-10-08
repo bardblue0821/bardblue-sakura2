@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import ShareButton from './ShareButton';
 
 type imgJson = {
   filename: string,
@@ -77,6 +78,7 @@ const GalleryImageModal: React.FC<GalleryImageModalProps> = ({ json, currentInde
             {img.year}年 {img.month}月 {img.day}日 {img.hour}時 {img.minute}分 {img.second}秒
           </h2>
         )}
+        <ShareButton shareUrl={img.original} />
       </div>
       {/* 右ボタン */}
       {currentIndex < json.length - 1 && (

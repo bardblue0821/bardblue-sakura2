@@ -10,6 +10,7 @@ import NextButton from './NextButton';
 import RepeatButton from './RepeatButton';
 import VolumeSlider from './VolumeSlider';
 import { useNavigate } from 'react-router-dom';
+import ShareButton from '../common/ShareButton';
 
 const Music: React.FC = () => {
   const audioFiles = getJsonMusic();
@@ -64,7 +65,7 @@ const Music: React.FC = () => {
       barWidth: 2,
       cursorColor: '#de3700ff',
     });
-    wavesurfer.load(audioFiles[0].url);
+    wavesurfer.load(audioFiles[currentTrack].url);
     wavesurferRef.current = wavesurfer;
     return () => wavesurfer.destroy();
   };
@@ -126,6 +127,7 @@ const Music: React.FC = () => {
               <NextButton onNext={handleNext} />
               <RepeatButton isRepeat={isRepeat} onToggle={() => setIsRepeat(r => !r)} />
               <VolumeSlider volume={volume} setVolume={setVolume} wavesurferRef={wavesurferRef} />
+              <ShareButton shareUrl="" />
             </div>
             <div className="mt-4 text-xl text-yellow-200">
               {audioFiles[currentTrack].label}
