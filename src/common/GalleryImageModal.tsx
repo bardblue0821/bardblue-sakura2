@@ -2,32 +2,45 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { imgJson } from '../type';
 import getJsonIllust from '../illust/getJsonIllust';
+import getJsonVrchat from '../vrchat/getJsonVrchat';
 import ShareButton from './ShareButton';
 
 const GalleryImageModal: React.FC = () => {
   const { imageName } = useParams();
   const navigate = useNavigate();
-  const json: imgJson[] = getJsonIllust();
+
+  const path = window.location.pathname;
+  let galleryPath = "";
+  if (path.startsWith('/home/vrchat')) { galleryPath = "vrchat"; }
+  if (path.startsWith('/home/illust')) { galleryPath = "illust"; }
+  
+  let json: imgJson[] = [];
+  galleryPath === "vrchat" ? json = getJsonVrchat() : 
+  galleryPath === "illust" ? json = getJsonIllust() : json = [];
+
   const currentIndex = json.findIndex(img => img.filename === imageName);
   if (currentIndex === -1) return null;
   const img = json[currentIndex];
 
   // モーダルの閉じる処理
   const handleClose = () => {
-    navigate('/home/illust');
+    galleryPath === "vrchat" ? navigate('/home/vrchat') : 
+    galleryPath === "illust" ? navigate('/home/illust') : null;
   };
 
   // 画像切り替え（URLも更新）
   const next = () => {
     if (currentIndex < json.length - 1) {
-      navigate(`/home/illust/${json[currentIndex + 1].filename}`);
+      navigate(`/home/${galleryPath}/${json[currentIndex + 1].filename}`);
     }
   };
+
   const prev = () => {
     if (currentIndex > 0) {
-      navigate(`/home/illust/${json[currentIndex - 1].filename}`);
+      navigate(`/home/${galleryPath}/${json[currentIndex - 1].filename}`);
     }
   };
+  
   const ChangeImageButton: React.FC<{ direction: 'next' | 'prev' }> = ({ direction }) => {
     const tw = direction === 'next' ? 'right-4' : 'left-4';
     const mark = direction === 'next' ? '▶' : '◀';
