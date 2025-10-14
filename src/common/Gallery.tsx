@@ -44,15 +44,17 @@ const Gallery: React.FC<GalleryProps> = ({ json, onImageClick }) => {
               columnClassName=""
             >
               {grouped[year].map((img: imgJson, idx: number) => (
-                <img
-                  key={img.filename}
-                  src={img.thumb ?? undefined}
-                  alt={img.filename}
-                  className="w-full mb-2 transition-transform duration-300 hover:scale-105 cursor-pointer hover:grayscale-20 grayscale-50"
-                  onClick={() => onImageClick(img.filename)}
-                  ref={el => { imgRefs.current[json.indexOf(img)] = el; }}
-                  loading="lazy"
-                />
+                <div key={img.filename} className="relative">
+                  <div className="absolute inset-0 bg-gray-200 animate-pulse"></div> {/* プレースホルダー */}
+                  <img
+                    src={img.thumb ?? undefined}
+                    alt={img.filename}
+                    className="w-full mb-2 transition-transform duration-300 hover:scale-105 cursor-pointer hover:grayscale-20 grayscale-50"
+                    onClick={() => onImageClick(img.filename)}
+                    ref={el => { imgRefs.current[json.indexOf(img)] = el; }}
+                    loading="lazy"
+                  />
+                </div>
               ))}
             </Masonry>
           </div>
